@@ -1,0 +1,90 @@
+# --------------------------------------------
+# REQUIRED: BASIC APP SETTINGS
+# --------------------------------------------
+APP_ENV={{snipe_environment}}
+APP_DEBUG={{snipe_debug_mode}}
+APP_KEY=ChangeMe
+APP_URL=http://{{snipe_domain}}
+APP_TIMEZONE='UTC'
+APP_LOCALE=en
+
+
+# --------------------------------------------
+# REQUIRED: DATABASE SETTINGS
+# --------------------------------------------
+DB_CONNECTION=mysql
+DB_HOST={{snipe_db_host}}
+DB_DATABASE={{snipe_db_name}}
+DB_USERNAME={{snipe_db_user}}
+DB_PASSWORD={{snipe_db_pass}}
+DB_PREFIX=null
+DB_DUMP_PATH='/usr/bin'
+
+
+
+# --------------------------------------------
+# REQUIRED: OUTGOING MAIL SERVER SETTINGS
+# --------------------------------------------
+MAIL_DRIVER=smtp
+MAIL_HOST={{snipe_smtp_host}}
+MAIL_PORT={{snipe_smtp_port}}
+MAIL_USERNAME={{snipe_smtp_user}}
+MAIL_PASSWORD={{snipe_smtp_pass}}
+MAIL_ENCRYPTION={{snipe_smtp_encryption}}
+MAIL_FROM_ADDR={{snipe_email_from}}
+MAIL_FROM_NAME='Snipe-IT'
+MAIL_REPLYTO_ADDR={{snipe_email_from}}
+MAIL_REPLYTO_NAME='Snipe-IT'
+
+
+# --------------------------------------------
+# REQUIRED: IMAGE LIBRARY
+# This should be gd or imagick
+# --------------------------------------------
+IMAGE_LIB=gd
+
+
+# --------------------------------------------
+# OPTIONAL: SESSION SETTINGS
+# --------------------------------------------
+SESSION_LIFETIME=12000
+EXPIRE_ON_CLOSE=false
+ENCRYPT=false
+COOKIE_NAME=snipeit_session
+COOKIE_DOMAIN=null
+SECURE_COOKIES=false
+
+
+# --------------------------------------------
+# OPTIONAL: CACHE SETTINGS
+# --------------------------------------------
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+
+# --------------------------------------------
+# OPTIONAL: AWS S3 SETTINGS
+# --------------------------------------------
+AWS_SECRET=null
+AWS_KEY=null
+AWS_REGION=null
+AWS_BUCKET=null
+
+# --------------------------------------------
+# OPTIONAL: LOGIN THROTTLING
+# --------------------------------------------
+LOGIN_MAX_ATTEMPTS=5
+LOGIN_LOCKOUT_DURATION=60
+
+# --------------------------------------------
+# OPTIONAL: MISC
+# --------------------------------------------
+APP_LOG=single
+APP_LOG_MAX_FILES=10
+APP_LOG_LEVEL=debug
+FILESYSTEM_DISK=local
+APP_TRUSTED_PROXIES=192.168.1.1,10.0.0.1
+ALLOW_IFRAMING=false
+GOOGLE_MAPS_API=null
+BACKUP_ENV=true

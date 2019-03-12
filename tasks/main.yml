@@ -1,2 +1,4 @@
 ---
 # tasks file for snipe-it
+- include_tasks: host_bootstrap.yml
+- include_tasks: snipeit_install.yml

@@ -1,0 +1,71 @@
+- name: Host Bootstrap | Install prerequisites
+  apt:
+    name: [software-properties-common, git, debconf-utils, unzip]
+    state: present
+  become: true
+
+- name: Host Bootstrap | Purge http servers and php
+  apt:
+    name: [apache2*, php*, nginx*]
+    state: absent
+    purge: yes
+    autoremove: yes
+  become: true
+  when: snipe_clean_env
+
+- name: Host Bootstrap | Add ppa repositories
+  apt_repository:
+    repo: ppa:ondrej/php
+  become: true
+
+- name: Host Bootstrap | Install PHP 7.2 packages
+  apt:
+    name: [php-common, php-pear, php7.2-bcmath, php7.2-cli, php7.2-common, php7.2-curl, php7.2-dev, php7.2-gd, 
+            php7.2-intl, php7.2-json, php7.2-ldap, php7.2-mbstring, php7.2-mysql, php7.2-opcache, php7.2-readline, 
+            php7.2-xml, php7.2-zip]
+    state: present
+  become: true
+
+- name: Host Bootstrap | Install Nginx and PHP-FPM
+  apt:
+    name: [nginx, php7.2-fpm]
+    state: present
+  when: snipe_http_server == "nginx"
+  become: true
+
+- name: Host Bootstrap | Install Apache2 and PHP-7.2
+  apt:
+    name: [apache, php7.2]
+    state: present
+  when: snipe_http_server == "apache"
+  become: true
+
+- name: Host Bootstrap | Mysql | Set root password
+  shell: debconf-set-selections <<< "mysql-server mysql-server/root_password password {{snipe_db_pass}}"
+  args:
+    executable: /bin/bash
+    warn: no
+  become: true
+
+- name: Host Bootstrap | Mysql | Set root repassword
+  shell: debconf-set-selections <<< "mysql-server mysql-server/root_password_again password {{snipe_db_pass}}"
+  args:
+    executable: /bin/bash
+    warn: no
+  become: true
+
+- name: Host Bootstrap | Mysql | Install mysql-server
+  apt:
+    name: [mysql-server, python-mysqldb]
+    state: present
+  become: true
+
+- name: Host Bootstrap | Mysql | Install mysql-server
+  mysql_db:
+    login_host: "{{snipe_db_host}}"
+    login_port: "{{snipe_db_port}}"
+    login_user: root
+    login_password: "{{snipe_db_pass}}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{snipe_db_name}}"
+    state: present
