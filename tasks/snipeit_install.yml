@@ -4,6 +4,8 @@
     dest: "/opt"
     remote_src: yes
     mode: 0775
+    owner: www-data
+    group: www-data
   become: true
 
 - name: "Snipe install | Link downloaded file to {{ snipe_install_dir }}"
@@ -12,12 +14,23 @@
     dest: "{{ snipe_install_dir }}"
     state: link
     mode: 0775
+    owner: www-data
+    group: www-data
   become: true
+
+- name: Snipe install | Change ownership
+  file: 
+    path: "{{ snipe_install_dir }}-{{ snipe_install_version }}"
+    owner: www-data
+    group: www-data
+    recurse: yes
+  become: true  
 
 - name: Snipe install | Copy updated .env file to snipe-it directory
   template:
     src: dotenv.j2
     dest: "{{ snipe_install_dir }}/.env"
+  become: true
 
 - name: Snipe install | Install php composer
   shell: curl -sS https://getcomposer.org/installer | php
@@ -25,6 +38,7 @@
     executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
+  become: true
 
 - name: Snipe install | Install snipe dependencies
   shell: php composer.phar global require hirak/prestissimo
@@ -39,6 +53,7 @@
     executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
+  become: true
 
 - name: Snipe install | Generate app_key
   shell: php artisan key:generate --force
@@ -46,6 +61,7 @@
     executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
+  become: true
 
 - name: Snipe install | Clear cached config
   shell: php artisan config:clear
@@ -53,6 +69,7 @@
     executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
+  become: true
 
 - name: Snipe install | Copy updated nginx site config
   template:
