@@ -1,6 +1,7 @@
 # Ansible Role: Snipe-IT
 
 An Ansible Role that installs [Snipe-IT](https://snipeitapp.com/) on Debian/Ubuntu nodes. The application is being deployed on nginx with php-fpm 7.2
+
 __TODO__: 
   - add possibility to deploy snipe-it on apache2
   - add possibility to use external database server 
