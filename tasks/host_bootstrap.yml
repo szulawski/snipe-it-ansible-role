@@ -51,12 +51,11 @@
     state: present
   become: true
 
-- name: Host Bootstrap | Mysql | Install mysql-server
+- name: Host Bootstrap | Mysql | Create database
   mysql_db:
     login_host: "{{ snipe_db_host }}"
     login_port: "{{ snipe_db_port }}"
     login_user: root
     login_password: "{{ snipe_db_pass }}"
-    login_unix_socket: /var/run/mysqld/mysqld.sock
     name: "{{ snipe_db_name }}"
     state: present

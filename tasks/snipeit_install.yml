@@ -35,38 +35,34 @@
 - name: Snipe install | Install php composer
   shell: curl -sS https://getcomposer.org/installer | php
   args:
-    executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
+    executable: /bin/bash
   become: true
 
 - name: Snipe install | Install snipe dependencies
-  shell: php composer.phar global require hirak/prestissimo
+  command: php composer.phar global require hirak/prestissimo
   args:
-    executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Install snipe dependencies
-  shell: php composer.phar install --no-dev --prefer-source
+  command: php composer.phar install --no-dev --prefer-source
   args:
-    executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
   become: true
 
 - name: Snipe install | Generate app_key
-  shell: php artisan key:generate --force
+  command: php artisan key:generate --force
   args:
-    executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
   become: true
 
 - name: Snipe install | Clear cached config
-  shell: php artisan config:clear
+  command: php artisan config:clear
   args:
-    executable: /bin/bash
     chdir: "{{ snipe_install_dir }}"
     warn: no
   become: true
