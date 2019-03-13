@@ -19,12 +19,12 @@
   become: true
 
 - name: Snipe install | Change ownership
-  file: 
+  file:
     path: "{{ snipe_install_dir }}-{{ snipe_install_version }}"
     owner: www-data
     group: www-data
     recurse: yes
-  become: true  
+  become: true
 
 - name: Snipe install | Copy updated .env file to snipe-it directory
   template:
@@ -77,4 +77,3 @@
     dest: /etc/nginx/sites-available/default
   notify: restart nginx
   become: true
-    
