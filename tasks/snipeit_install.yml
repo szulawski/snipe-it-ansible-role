@@ -6,6 +6,7 @@
     mode: 0775
     owner: www-data
     group: www-data
+    creates: "{{ snipe_install_dir }}-{{ snipe_install_version }}"
   become: true
 
 - name: "Snipe install | Link downloaded file to {{ snipe_install_dir }}"
@@ -38,18 +39,21 @@
     chdir: "{{ snipe_install_dir }}"
     warn: no
     executable: /bin/bash
+    creates: "{{ snipe_install_dir }}/composer.phar"
   become: true
 
 - name: Snipe install | Install snipe dependencies
   command: php composer.phar global require hirak/prestissimo
   args:
     chdir: "{{ snipe_install_dir }}"
+    creates: "{{ lookup('env','HOME') }}/.config/composer/vendor/hirak/prestissimo"
     warn: no
-
+    
 - name: Snipe install | Install snipe dependencies
   command: php composer.phar install --no-dev --prefer-source
   args:
     chdir: "{{ snipe_install_dir }}"
+    creates: "{{ snipe_install_dir }}/vendor"
     warn: no
   become: true
 

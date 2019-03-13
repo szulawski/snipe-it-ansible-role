@@ -20,8 +20,27 @@
 
 - name: Host Bootstrap | Install PHP 7.2 packages
   apt:
-    name: [php-common, php-pear, php7.2-bcmath, php7.2-cli, php7.2-common, php7.2-curl, php7.2-dev, php7.2-gd, php7.2-intl, php7.2-json, php7.2-ldap, php7.2-mbstring, php7.2-mysql, php7.2-opcache, php7.2-readline, php7.2-xml, php7.2-zip]
+    name: "{{ packages }}"
     state: present
+  vars:
+    packages:
+    - php-common
+    - php-pear
+    - php7.2-bcmath
+    - php7.2-cli
+    - php7.2-common
+    - php7.2-curl
+    - php7.2-dev
+    - php7.2-gd
+    - php7.2-intl
+    - php7.2-json
+    - php7.2-ldap
+    - php7.2-mbstring
+    - php7.2-mysql
+    - php7.2-opcache
+    - php7.2-readline
+    - php7.2-xml
+    - php7.2-zip
   become: true
 
 - name: Host Bootstrap | Install Nginx and PHP-FPM
@@ -32,7 +51,7 @@
   become: true
 
 - name: Host Bootstrap | Mysql | Set root password
-  shell: debconf-set-selections <<< "mysql-server mysql-server/root_password password {{snipe_db_pass}}"
+  shell: debconf-set-selections <<< "mysql-server mysql-server/root_password password {{ snipe_db_pass }}"
   args:
     executable: /bin/bash
     warn: no
