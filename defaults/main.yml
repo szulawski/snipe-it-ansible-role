@@ -1,27 +1,21 @@
 ---
 # defaults file for snipe-it
-
 snipe_clean_env: false
-
 snipe_install_dir: /opt/snipe-it
 snipe_install_version: 4.6.13
 snipe_domain: localhost
 snipe_environment: production
 snipe_debug_mode: false
-
 snipe_http_server: nginx
 snipe_php_version: 7.1
-
 snipe_db_host: localhost
 snipe_db_port: 3306
 snipe_db_name: snipeit
 snipe_db_user: root
 snipe_db_pass: snipeit
-
 snipe_smtp_host: localhost
 snipe_smtp_port: 25
 snipe_smtp_user: snipeit
 snipe_smtp_pass: snipeit
 snipe_smtp_encryption: tls
 snipe_email_from: snipeit@host.foo
-

@@ -1,6 +1,5 @@
 ---
 # handlers file for snipe-it
-
 - name: restart nginx
   become: true
   service: name=nginx state=restarted

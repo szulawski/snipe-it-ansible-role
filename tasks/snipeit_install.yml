@@ -1,6 +1,6 @@
-- name: "Snipe install | Download snipe release v{{snipe_install_version}}"
+- name: "Snipe install | Download snipe release v{{ snipe_install_version }}"
   unarchive:
-    src: "https://github.com/snipe/snipe-it/archive/v{{snipe_install_version}}.zip"
+    src: "https://github.com/snipe/snipe-it/archive/v{{ snipe_install_version }}.zip"
     dest: "/opt"
     remote_src: yes
     mode: 0755
@@ -8,10 +8,10 @@
     group: www-data
   become: true
 
-- name: "Snipe install | Link downloaded file to {{snipe_install_dir}}"
+- name: "Snipe install | Link downloaded file to {{ snipe_install_dir }}"
   file:
-    src: "{{snipe_install_dir}}-{{snipe_install_version}}"
-    dest: "{{snipe_install_dir}}"
+    src: "{{ snipe_install_dir }}-{{ snipe_install_version }}"
+    dest: "{{ snipe_install_dir }}"
     state: link
     mode: 0755
     owner: www-data
@@ -21,7 +21,7 @@
 - name: Snipe install | Copy updated .env file to snipe-it directory
   template:
     src: dotenv.j2
-    dest: "{{snipe_install_dir}}/.env"
+    dest: "{{ snipe_install_dir }}/.env"
     owner: www-data
     group: www-data
 
@@ -29,35 +29,35 @@
   shell: curl -sS https://getcomposer.org/installer | php
   args:
     executable: /bin/bash
-    chdir: "{{snipe_install_dir}}"
+    chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Install snipe dependencies
   shell: php composer.phar global require hirak/prestissimo
   args:
     executable: /bin/bash
-    chdir: "{{snipe_install_dir}}"
+    chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Install snipe dependencies
   shell: php composer.phar install --no-dev --prefer-source
   args:
     executable: /bin/bash
-    chdir: "{{snipe_install_dir}}"
+    chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Generate app_key
   shell: php artisan key:generate --force
   args:
     executable: /bin/bash
-    chdir: "{{snipe_install_dir}}"
+    chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Clear cached config
   shell: php artisan config:clear
   args:
     executable: /bin/bash
-    chdir: "{{snipe_install_dir}}"
+    chdir: "{{ snipe_install_dir }}"
     warn: no
 
 - name: Snipe install | Copy updated nginx site config
