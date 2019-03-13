@@ -1,38 +1,66 @@
-Role Name
-=========
+# Ansible Role: Snipe-IT
 
-A brief description of the role goes here.
+An Ansible Role that installs [Snipe-IT](https://snipeitapp.com/) on Debian/Ubuntu nodes. The application is being deployed on nginx with php-fpm 7.2
+__TODO__: 
+  - add possibility to deploy snipe-it on apache2
+  - add possibility to use external database server 
+  - add possibility to choose from mysql/mariadb
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Role is self sustainable - it installs all needed prerequisites on the target node.
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Available variables are listed below along with their default values:
 
-Dependencies
-------------
+```yaml
+#if you want to purge all php, nginx, apache2 installation and configuration change it to true
+snipe_clean_env: false
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
+snipe_install_dir: /opt/snipe-it
+snipe_install_version: 4.6.13
+snipe_domain: localhost
+snipe_environment: production
+snipe_debug_mode: false
+snipe_http_server: nginx
+snipe_php_version: 7.1
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+#default db settings
+snipe_db_host: localhost
+snipe_db_port: 3306
+snipe_db_name: snipeit
+snipe_db_user: root
+snipe_db_pass: snipeit
 
-    - hosts: servers
+snipe_smtp_host: localhost
+snipe_smtp_port: 25
+snipe_smtp_user: snipeit
+snipe_smtp_pass: snipeit
+snipe_smtp_encryption: tls
+snipe_email_from: snipeit@host.foo
+
+```
+
+## Example Playbook
+
+```yaml
+    - hosts: snipeit
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: mylocaldevstack.snipeit
+```
 
-License
--------
+if you want to change the version of snipe-it
 
-BSD
+```yaml
+    - hosts: snipeit
+      vars:
+        snipe_install_version: 4.6.12
+      roles:
+         - role: mylocaldevstack.snipeit
+```
 
-Author Information
-------------------
+## License
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Apache
