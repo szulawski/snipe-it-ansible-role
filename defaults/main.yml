@@ -9,7 +9,7 @@ snipe_domain: localhost
 snipe_environment: production
 snipe_debug_mode: false
 
-snipe_http_server: nginx #alternatively you can use apache2
+snipe_http_server: nginx
 snipe_php_version: 7.1
 
 snipe_db_host: localhost

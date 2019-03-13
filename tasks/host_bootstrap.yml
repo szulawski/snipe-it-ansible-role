@@ -33,12 +33,12 @@
   when: snipe_http_server == "nginx"
   become: true
 
-- name: Host Bootstrap | Install Apache2 and PHP-7.2
-  apt:
-    name: [apache, php7.2]
-    state: present
-  when: snipe_http_server == "apache"
-  become: true
+# - name: Host Bootstrap | Install Apache2 and PHP-7.2
+#   apt:
+#     name: [apache, php7.2]
+#     state: present
+#   when: snipe_http_server == "apache"
+#   become: true
 
 - name: Host Bootstrap | Mysql | Set root password
   shell: debconf-set-selections <<< "mysql-server mysql-server/root_password password {{snipe_db_pass}}"
