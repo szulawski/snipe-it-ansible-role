@@ -13,10 +13,25 @@
   become: true
   when: snipe_clean_env
 
-- name: Host Bootstrap | Add ppa repositories
+- name: Host Bootstrap | Add ppa repositories - Ubuntu
   apt_repository:
     repo: ppa:ondrej/php
   become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: add sury php key - Debian Bullseye
+  apt_key:
+    url: https://packages.sury.org/php/apt.gpg
+    keyring: /usr/share/keyrings/deb.sury.org-php.gpg
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
+
+- name: add sury php repository - Debian Bullseye
+  apt_repository: 
+    repo: 'deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ bullseye main' 
+    state: present 
+    filename: php
+    update_cache: yes
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
 
 - name: Host Bootstrap | Install PHP 7.2 packages
   apt:
