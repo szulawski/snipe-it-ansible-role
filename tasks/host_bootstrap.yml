@@ -23,7 +23,7 @@
   apt_key:
     url: https://packages.sury.org/php/apt.gpg
     keyring: /usr/share/keyrings/deb.sury.org-php.gpg
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
 
 - name: add sury php repository - Debian Bullseye
   apt_repository: 
@@ -31,7 +31,7 @@
     state: present 
     filename: php
     update_cache: yes
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
 
 - name: Host Bootstrap | Install PHP 7.2 packages
   apt:
