@@ -35,9 +35,9 @@
 
 - name: Snipe install | Install php composer
   get_url:
-    url: https://getcomposer.org/download/latest-1.x/composer.phar
-    dest: {{ snipe_install_dir }}/composer.phar
-    mode: '0776'
+    url: 'https://getcomposer.org/download/latest-1.x/composer.phar'
+    dest: "{{ snipe_install_dir }}/composer.phar"
+    mode: '0775'
 
 - name: Snipe install | Install snipe dependencies
   command: php composer.phar global require hirak/prestissimo
