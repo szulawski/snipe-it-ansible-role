@@ -72,12 +72,21 @@
     warn: no
   become: true
 
-- name: Host Bootstrap | Mysql | Set root repassword
+- name: Host Bootstrap | Mysql | Set root repassword - Debian
   shell: debconf-set-selections <<< "mysql-server mysql-server/root_password_again password {{ snipe_db_pass }}"
   args:
     executable: /bin/bash
     warn: no
   become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Host Bootstrap | Mysql | Set root password - Debian
+  shell: debconf-set-selections <<< "default-mysql-server default-mysql-server/root_password password {{ snipe_db_pass }}"
+  args:
+    executable: /bin/bash
+    warn: no
+  become: true
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
 
 - name: Host Bootstrap | Mysql | Install mysql-server - Ubuntu
   apt:
