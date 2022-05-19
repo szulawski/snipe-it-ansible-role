@@ -34,7 +34,7 @@
   become: true
 
 - name: Snipe install | Install php composer
-  shell: curl -sS https://getcomposer.org/installer | php
+  shell: curl -sS https://getcomposer.org/installer --version=1.10.19 | php
   args:
     chdir: "{{ snipe_install_dir }}"
     warn: no
