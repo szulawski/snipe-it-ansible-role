@@ -33,41 +33,6 @@
     dest: "{{ snipe_install_dir }}/.env"
   become: true
 
-- name: Snipe install | Install php composer
-  get_url:
-    url: 'https://getcomposer.org/download/latest-stable/composer.phar'
-    dest: "{{ snipe_install_dir }}/composer.phar"
-    mode: '0775'
-
-- name: Snipe install | Install snipe dependencies
-  command: php composer.phar global require hirak/prestissimo
-  args:
-    chdir: "{{ snipe_install_dir }}"
-    creates: "{{ lookup('env','HOME') }}/.config/composer/vendor/hirak/prestissimo"
-    warn: no
-    
-- name: Snipe install | Install snipe dependencies
-  command: php composer.phar install --no-dev --prefer-source
-  args:
-    chdir: "{{ snipe_install_dir }}"
-    creates: "{{ snipe_install_dir }}/vendor"
-    warn: no
-  become: true
-
-- name: Snipe install | Generate app_key
-  command: php artisan key:generate --force
-  args:
-    chdir: "{{ snipe_install_dir }}"
-    warn: no
-  become: true
-
-- name: Snipe install | Clear cached config
-  command: php artisan config:clear
-  args:
-    chdir: "{{ snipe_install_dir }}"
-    warn: no
-  become: true
-
 - name: Snipe install | Copy updated nginx site config
   template:
     src: snipeit.conf.j2
