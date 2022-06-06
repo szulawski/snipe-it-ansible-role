@@ -19,7 +19,7 @@
     state: present
   vars:
     packages:
-    - php8.1
+    - php8.1-common
     - php-pear
     - php8.1-bcmath
     - php8.1-cli
