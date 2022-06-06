@@ -2,11 +2,10 @@
 # defaults file for snipe-it
 snipe_clean_env: false
 snipe_install_dir: /opt/snipe-it
-snipe_install_version: 4.6.13
+snipe_install_version: 6.0.2
 snipe_environment: production
 snipe_debug_mode: false
 snipe_http_server: nginx
-snipe_php_version: 7.1
 snipe_db_host: localhost
 snipe_db_port: 3306
 snipe_db_name: snipeit
