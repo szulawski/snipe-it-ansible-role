@@ -33,7 +33,7 @@
     dest: "{{ snipe_install_dir }}/.env"
   become: true
 
-- name: Snipe install | Install php composer
+- name: Snipe install | Download php composer
   shell: curl -sS https://getcomposer.org/installer | php
   args:
     chdir: "{{ snipe_install_dir }}"
@@ -48,3 +48,25 @@
     chdir: "{{ snipe_install_dir }}"
     creates: "{{ snipe_install_dir }}/vendor"
     warn: no
+  become: true
+
+- name: Snipe install | Generate app_key
+  command: php artisan key:generate --force
+  args:
+    chdir: "{{ snipe_install_dir }}"
+    warn: no
+  become: true
+
+- name: Snipe install | Clear cached config
+  command: php artisan config:clear
+  args:
+    chdir: "{{ snipe_install_dir }}"
+    warn: no
+  become: true
+
+- name: Snipe install | Copy updated nginx site config
+  template:
+    src: snipeit.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: restart nginx
+  become: true
