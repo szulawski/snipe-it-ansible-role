@@ -1,11 +1,6 @@
 # Ansible Role: Snipe-IT
 
-An Ansible Role that installs [Snipe-IT](https://snipeitapp.com/) on Debian/Ubuntu nodes. The application is being deployed on nginx with php-fpm 7.2
-
-__TODO__: 
-  - add possibility to deploy snipe-it on apache2
-  - add possibility to use external database server 
-  - add possibility to choose from mysql/mariadb
+An Ansible Role that installs [Snipe-IT](https://snipeitapp.com/) on Debian nodes. The application is being deployed on nginx with php-fpm 7.4
 
 ## Requirements
 
@@ -21,12 +16,11 @@ snipe_clean_env: false
 
 
 snipe_install_dir: /opt/snipe-it
-snipe_install_version: 4.6.13
+snipe_install_version: 6.0.2
 snipe_domain: localhost
 snipe_environment: production
 snipe_debug_mode: false
 snipe_http_server: nginx
-snipe_php_version: 7.1
 
 #default db settings
 snipe_db_host: localhost
@@ -57,7 +51,7 @@ if you want to change the version of snipe-it
 ```yaml
     - hosts: snipeit
       vars:
-        snipe_install_version: 4.6.12
+        snipe_install_version: 6.0.2
       roles:
          - role: mylocaldevstack.snipeit
 ```
