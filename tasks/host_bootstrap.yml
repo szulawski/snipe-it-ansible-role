@@ -13,7 +13,7 @@
   become: true
   when: snipe_clean_env
 
-- name: Host Bootstrap | Install PHP 8.1 packages
+- name: Host Bootstrap | Install PHP 7.4 packages
   apt:
     name: "{{ packages }}"
     state: present

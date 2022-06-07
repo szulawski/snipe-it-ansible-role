@@ -34,10 +34,13 @@
   become: true
 
 - name: Snipe install | Install php composer
-  get_url:
-    url: 'https://getcomposer.org/download/latest-stable/composer.phar'
-    dest: "{{ snipe_install_dir }}/composer.phar"
-    mode: '0775'
+  shell: curl -sS https://getcomposer.org/installer | php
+  args:
+    chdir: "{{ snipe_install_dir }}"
+    warn: no
+    executable: /bin/bash
+    creates: "{{ snipe_install_dir }}/composer.phar"
+  become: true
 
 - name: Snipe install | Install php composer
   command: php composer.phar install --no-dev --prefer-source
