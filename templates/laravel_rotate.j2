@@ -1,7 +1,7 @@
 /opt/snipe-it/storage/logs/laravel.log { 
-    monthly 
+    {{ laravel_rotate_freq }} 
     missingok 
-    rotate 12 
+    rotate {{ laravel_rotate_num }}
     compress
     notifempty 
     create 755 www-data www-data 

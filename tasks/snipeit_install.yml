@@ -73,5 +73,5 @@
 
 - name: Configure logrotate
   template:
-    src: laravel.conf.j2
-    dest: /etc/logrotate.d/laravel.conf
+    src: laravel_rotate.j2
+    dest: /etc/logrotate.d/laravel_rotate

@@ -16,3 +16,5 @@ snipe_smtp_port: 25
 snipe_smtp_user: snipeit
 snipe_smtp_pass: snipeit
 snipe_smtp_encryption: tls
+laravel_rotate_freq: monthly
+laravel_rotate_num: 12
