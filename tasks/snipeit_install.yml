@@ -70,3 +70,8 @@
     dest: /etc/nginx/sites-available/default
   notify: restart nginx
   become: true
+
+- name: Configure logrotate
+  template:
+    src: laravel.conf.j2
+    dest: /etc/logrotate.d/laravel.conf
