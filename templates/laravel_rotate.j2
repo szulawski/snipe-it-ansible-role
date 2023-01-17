@@ -3,6 +3,7 @@
     missingok 
     rotate {{ laravel_rotate_num }}
     compress
-    notifempty 
+    notifempty
+    su www-data www-data 
     create 755 www-data www-data 
 }
