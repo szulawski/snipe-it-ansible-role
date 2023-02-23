@@ -1,6 +1,6 @@
 - name: Host Bootstrap | Install prerequisites
   apt:
-    name: [software-properties-common, git, debconf-utils, unzip]
+    name: [software-properties-common, git, debconf-utils, unzip, curl]
     state: present
   become: true
 
@@ -49,7 +49,8 @@
   apt:
     name: [default-mysql-server, python3-mysqldb]
     state: present
-  become: true  
+  become: true
+  register: mysqlinstall
 
 - name: Set MySQL root Password
   become: True
@@ -60,6 +61,7 @@
     login_user: "root"
     login_password: ""
     state: present
+  when: mysqlinstall.changed
 
 - name: Host Bootstrap | Mysql | Create database
   mysql_db:

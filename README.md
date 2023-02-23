@@ -8,7 +8,7 @@ Role is self sustainable - it installs all needed prerequisites on the target no
 
 ## Role Variables
 
-Available variables are listed below along with their default values:
+Available variables are listed below along with their default values. Please generate an app key with `php artisan key:generate --show` and replace `snipe_app_key`.
 
 ```yaml
 #if you want to purge all php, nginx, apache2 installation and configuration change it to true
@@ -21,6 +21,7 @@ snipe_domain: localhost
 snipe_environment: production
 snipe_debug_mode: false
 snipe_http_server: nginx
+snipe_app_key: ChangeMe
 
 #default db settings
 snipe_db_host: localhost
