@@ -48,13 +48,8 @@
     chdir: "{{ snipe_install_dir }}"
     creates: "{{ snipe_install_dir }}/vendor"
     warn: no
-  become: true
-
-- name: Snipe install | Generate app_key
-  command: php artisan key:generate --force
-  args:
-    chdir: "{{ snipe_install_dir }}"
-    warn: no
+  environment:
+    COMPOSER_ALLOW_SUPERUSER: 1
   become: true
 
 - name: Snipe install | Clear cached config

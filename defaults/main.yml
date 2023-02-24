@@ -7,6 +7,7 @@ snipe_environment: production
 snipe_debug_mode: false
 snipe_log_debug_mode: warning
 snipe_http_server: nginx
+snipe_app_key: ChangeMe
 snipe_db_host: localhost
 snipe_db_port: 3306
 snipe_db_name: snipeit
