@@ -37,7 +37,6 @@
   shell: curl -sS https://getcomposer.org/installer | php
   args:
     chdir: "{{ snipe_install_dir }}"
-    warn: no
     executable: /bin/bash
     creates: "{{ snipe_install_dir }}/composer.phar"
   become: true
@@ -47,7 +46,6 @@
   args:
     chdir: "{{ snipe_install_dir }}"
     creates: "{{ snipe_install_dir }}/vendor"
-    warn: no
   environment:
     COMPOSER_ALLOW_SUPERUSER: 1
   become: true
@@ -56,7 +54,6 @@
   command: php artisan config:clear
   args:
     chdir: "{{ snipe_install_dir }}"
-    warn: no
   become: true
 
 - name: Snipe install | Copy updated nginx site config
